@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Pregled aerodroma</title>
+        <h:outputStylesheet name="css/primeflex/primeflex.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:commandLink action="aerodromiNaPocetnu">Početna stranica</p:commandLink><br/>
+            <p:commandLink action="#{prijavaKorisnika.odjaviSe}">Odjavi me</p:commandLink>
+        </h:form>
+        <h1>Pregled aerodroma</h1>
+        <h:form>
+            <div class="card">
+                <div class="ui-fluid">
+                    <p:outputLabel for="aerodromi" styleClass="p-col-12 p-md-2" value="Moji aerodromi"/>
+                    <div class="p-col-12 p-md-2">
+                        <p:selectOneMenu id="aerodromi" value="#{pregledAerodroma.aerodrom}">
+                            <f:selectItems value="#{pregledAerodroma.praceniAerodromi}" 
+                                           var="a" itemLabel="#{a.icao} - #{a.naziv}" 
+                                           itemValue="#{a.icao}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="ui-fluid">
+                    <p:outputLabel for="letDatum" styleClass="p-col-12 p-md-2" value="Datum leta"/>
+                    <div class="p-col-12 p-md-10">
+                        <div class="p-formgroup-inline">
+                            <div class="p-field">
+                                <p:inputText id="letDatum" value="#{pregledAerodroma.letDatum}" placeholder="01.01.2021" />
+                            </div>
+                            <div class="p-field">
+                                <p:commandButton value="Daj letove" action="#{pregledAerodroma.dajLetove}" update="letovi" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-fluid">
+                    <p:outputLabel for="datumMeteo" styleClass="p-col-12 p-md-2" value="Datum meteo podataka"/>
+                    <div class="p-col-12 p-md-10">
+                        <div class="p-formgroup-inline">
+                            <div class="p-field">
+                                <p:inputText id="datumMeteo" value="#{pregledAerodroma.datumMeteo}" placeholder="01.01.2021"/>
+                            </div>
+                            <div class="p-field">
+                                <p:commandButton value="Dohvati meteo" action="#{pregledAerodroma.dohvatiMeteo}" update="meteo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-fluid">
+                    <p:outputLabel for="vrijemeMeteoPodaci" styleClass="p-col-12 p-md-2" value="Datum i vrijeme meteo podaci"/>
+                    <div class="p-col-12 p-md-10">
+                        <div class="p-formgroup-inline">
+                            <div class="p-field">
+                                <p:inputText id="vrijemeMeteoPodaci" value="#{pregledAerodroma.vrijemeMeteoPodaci}" placeholder="01.01.2021 15:41:22"/>
+                            </div>
+                            <div class="p-field">
+                                <p:commandButton value="Dohvati meteo" action="#{pregledAerodroma.dohvatiVrijeme}" update="meteo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <p:dataTable id="letovi" var="l" 
+                             value="#{pregledAerodroma.letovi}" 
+                             rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} od {totalRecords} zapisa"
+                             rowsPerPageTemplate="5,10,15,{ShowAll|'Prikaži sve'}">
+
+                    <f:facet name="header">
+                        Popis letova
+                    </f:facet>
+
+                    <p:column headerText="Let">
+                        <h:outputText value="#{l.icao24}" />
+                    </p:column>
+
+                    <p:column headerText="Vrijeme polaska">
+                        <h:outputText value="#{pregledAerodroma.pretvorbaUTimestamp(l.firstSeen, true)}" />
+                    </p:column>
+
+                    <p:column headerText="Polazište">
+                        <h:outputText value="#{l.estDepartureAirport}" />
+                    </p:column>
+
+                    <p:column headerText="Vrijeme dolaska">
+                        <h:outputText value="#{pregledAerodroma.pretvorbaUTimestamp(l.lastSeen, true)}" />
+                    </p:column>
+
+                    <p:column headerText="Dolazište">
+                        <h:outputText value="#{l.estArrivalAirport}" />
+                    </p:column>
+
+                    <p:column headerText="Avion">
+                        <h:outputText value="#{l.callsign}" />
+                    </p:column>
+
+                    <p:column headerText="Polazište - horizontalna udaljenost">
+                        <h:outputText value="#{l.estDepartureAirportHorizDistance}" />
+                    </p:column>
+
+                    <p:column headerText="Polazište - vertikalna udaljenost">
+                        <h:outputText value="#{l.estDepartureAirportVertDistance}" />
+                    </p:column>
+
+                    <p:column headerText="Dolazište - horizontalna udaljenost">
+                        <h:outputText value="#{l.estArrivalAirportHorizDistance}" />
+                    </p:column>
+
+                    <p:column headerText="Dolazište - horizontalna udaljenost">
+                        <h:outputText value="#{l.estArrivalAirportVertDistance}" />
+                    </p:column>
+
+                    <p:column headerText="Broj mogućih polazišta">
+                        <h:outputText value="#{l.departureAirportCandidatesCount}" />
+                    </p:column>
+
+                    <p:column headerText="Broj mogućih dolazišta">
+                        <h:outputText value="#{l.arrivalAirportCandidatesCount}" />
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+            <br />
+            <div class="card">
+                <p:dataTable id="meteo" var="mp" 
+                             value="#{pregledAerodroma.meteo}"
+                             rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} od {totalRecords} zapisa"
+                             rowsPerPageTemplate="5,10,15,{ShowAll|'Prikaži sve'}">
+
+                    <f:facet name="header">
+                        Meteorološki podaci
+                    </f:facet>
+
+                    <p:column headerText="Aerodrom">
+                        <h:outputText value="#{mp.ident}" />
+                    </p:column>
+
+                    <p:column headerText="Datum">
+                        <h:outputText value="#{pregledAerodroma.pretvorbaUTimestamp(mp.dt, false)}" />
+                    </p:column>
+
+                    <p:column headerText="Temperatura">
+                        <h:outputText value="#{mp.mainTemp} °C" />
+                    </p:column>
+
+                    <p:column headerText="Tlak">
+                        <h:outputText value="#{mp.mainPressure} hPa" />
+                    </p:column>
+
+                    <p:column headerText="Vlaga">
+                        <h:outputText value="#{mp.mainHumidity} %" />
+                    </p:column>
+
+                    <p:column headerText="Brzina vjetra">
+                        <h:outputText value="#{mp.windSpeed}" />
+                    </p:column>
+
+                    <p:column headerText="Smjer vjetra">
+                        <h:outputText value="#{mp.windDeg}" />
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>

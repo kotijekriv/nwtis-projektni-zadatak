@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Popis korisnika</title>
+        <h:outputStylesheet name="css/primeflex/primeflex.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:commandLink action="korisnikNaPocetnu">Početna stranica</p:commandLink><br/>
+            <p:commandLink action="#{prijavaKorisnika.odjaviSe}">Odjavi me</p:commandLink>
+        </h:form>
+        <h1>Popis korisnika</h1>
+
+        <div class="card">
+            <h:form>
+                <p:dataTable id="korisnici" var="k" 
+                             value="#{pregledKorisnik.korisnici}"
+                             rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} od {totalRecords} zapisa"
+                             rowsPerPageTemplate="5,10,15,{ShowAll|'Prikaži sve'}"
+                             widgetVar="korisniciFilter"
+                             emptyMessage="Nije pronađen niti jedan korisnik"
+                             filteredValue="#{pregledKorisnik.filtrirano}">
+
+                    <f:facet name="header">
+                        Popis korisnika
+                    </f:facet>
+
+                    <p:column headerText="Korisničko ime" sortBy="#{k.korisnik}" filterBy="#{k.korisnik}" filterMatchMode="contains">
+                        <h:outputText value="#{k.korisnik}" />
+                    </p:column>
+
+                    <p:column headerText="Ime" sortBy="#{k.ime}" filterBy="#{k.ime}" filterMatchMode="contains">
+                        <h:outputText value="#{k.ime}" />
+                    </p:column>
+
+                    <p:column headerText="prezime" sortBy="#{k.prezime}" filterBy="#{k.prezime}" filterMatchMode="contains">
+                        <h:outputText value="#{k.prezime}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="pregledDnevnik.xhtml" x="163" y="757" zoom="true"/>
+        <Node id="pregledJMS.xhtml" x="762" y="310" zoom="true"/>
+        <Node id="pregledAerodroma.xhtml" x="735" y="261" zoom="true"/>
+        <Node id="pregledKorisnik.xhtml" x="961" y="633" zoom="true"/>
+        <Node id="greska.xhtml" x="113" y="396" zoom="true"/>
+        <Node id="pregledAktivnihKorisnika.xhtml" x="639" y="438" zoom="true"/>
+        <Node id="prijava.xhtml" x="347" y="102" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

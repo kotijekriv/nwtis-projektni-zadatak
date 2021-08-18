@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<faces-config version="2.3"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+    <navigation-rule>
+        <from-view-id>/pregledAerodroma.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>aerodromiNaPocetnu</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>aerodromiNaGresku</from-outcome>
+            <to-view-id>/greska.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>aerodromi</from-outcome>
+            <to-view-id>/pregledAerodroma.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/prijava.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>prijava</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>prijavaNaAerodrome</from-outcome>
+            <to-view-id>/pregledAerodroma.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>prijavaNaGresku</from-outcome>
+            <to-view-id>/greska.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>prijavaNaJMS</from-outcome>
+            <to-view-id>/pregledJMS.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>prijavaNaAktivneKorisnike</from-outcome>
+            <to-view-id>/pregledAktivnihKorisnika.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>prijavaNaKorisnik</from-outcome>
+            <to-view-id>/pregledKorisnik.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>prijavaNaDnevnik</from-outcome>
+            <to-view-id>/pregledDnevnik.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/greska.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>greskaNaPrijavu</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pregledJMS.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>JMS</from-outcome>
+            <to-view-id>/pregledJMS.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>JMSNaPocetnu</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>JMSNaGresku</from-outcome>
+            <to-view-id>/greska.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pregledAktivnihKorisnika.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>aktivniKorisniciNaPocetnu</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>aktivniKorisnici</from-outcome>
+            <to-view-id>/pregledAktivnihKorisnika.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>aktivniKorisniciNaGresku</from-outcome>
+            <to-view-id>/greska.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pregledKorisnik.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>korisnikNaPocetnu</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>korisnikNaGresku</from-outcome>
+            <to-view-id>/greska.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>korisnik</from-outcome>
+            <to-view-id>/pregledKorisnik.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pregledDnevnik.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>dnevnikNaPocetnu</from-outcome>
+            <to-view-id>/prijava.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>dnevnik</from-outcome>
+            <to-view-id>/pregledDnevnik.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>dnevnikNaGresku</from-outcome>
+            <to-view-id>/greska.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

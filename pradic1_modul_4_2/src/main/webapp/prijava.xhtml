@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Prijava korisnika</title>
+        <h:outputStylesheet name="css/primeflex/primeflex.css"/>
+    </h:head>
+    <h:body>
+        <h:panelGroup id="obrazac">
+            <h:form rendered="#{prijavaKorisnika.prijava}">
+                <h1>Prijava korisnika</h1>
+                <div class="card">
+                    <div class="p-formgroup-inline">
+                        <div class="p-field">
+                            <p:outputLabel for="korisnik" styleClass="ui-sr-only" value="Korisničko ime" />
+                            <p:inputText id="korisnik" value="#{prijavaKorisnika.korisnik}" placeholder="Korisničko ime"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="lozinka" styleClass="ui-sr-only" value="Lozinka" />
+                            <p:inputText id="lozinka" type="password" value="#{prijavaKorisnika.lozinka}" placeholder="Lozinka"/>
+                        </div>
+                        <p:commandButton value="Prijavi se" action="#{prijavaKorisnika.prijaviSe}" update="obrazac izbornik" />
+                    </div>
+                </div>
+            </h:form>
+        </h:panelGroup>
+
+        <h:panelGroup id="izbornik">
+            <h:form rendered="#{prijavaKorisnika.izbornik}">
+                <h1>Početna stranica</h1>
+                <div class="card">
+                    <ul style="list-style-type:none;">
+                        <li><p:commandLink action="#{pregledAerodroma.autoriziraj}">Pregled aerodroma</p:commandLink></li>
+                        <li><p:commandLink action="#{pregledKorisnik.autoriziraj}">Pregled korisnika</p:commandLink></li>
+                        <li><p:commandLink action="#{pregledJMS.autoriziraj}">Pregled JMS</p:commandLink></li>
+                        <li><p:commandLink action="#{pregledDnevnik.autoriziraj}">Pregled dnevnika</p:commandLink></li>
+                        <li><p:commandLink action="#{pregledAktivnihKorisnika.autoriziraj}">Pregled aktivnih korisnika</p:commandLink></li>
+                        <li><p:commandLink action="#{prijavaKorisnika.odjaviSe}" update="izbornik obrazac">Odjava</p:commandLink></li>
+                    </ul>
+                </div>
+            </h:form>
+        </h:panelGroup>
+    </h:body>
+</html>
+
+
+
